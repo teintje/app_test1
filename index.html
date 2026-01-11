@@ -93,9 +93,9 @@
             let accY = event.acceleration.y;
             let accZ = event.acceleration.z;
             // Pre-calculate sines and cosines
-            let c1 = Math.cos(h), s1 = Math.sin(h);
-            let c2 = Math.cos(p), s2 = Math.sin(p);
-            let c3 = Math.cos(r), s3 = Math.sin(r);
+            let c1 = Math.cos(heading), s1 = Math.sin(heading);
+            let c2 = Math.cos(pitch), s2 = Math.sin(pitch);
+            let c3 = Math.cos(roll), s3 = Math.sin(roll);
             
             // Body frame accelerations from your sensor
             let bx = event.acceleration.x;
@@ -133,6 +133,7 @@
 </body>
 
 </html>
+
 
 
 
