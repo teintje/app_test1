@@ -20,17 +20,10 @@
         <div id="accelX" class="value">0.00</div>
     </div>
     <div class="card">
-        <p>Velocity (X-axis)</p>
-        <div id="velX" class="value">0.00</div>
+        <p>Velocity </p>
+        <div id="vel" class="value">0.00</div>
     </div>
-        <div class="card">
-        <p>Velocity (Y-axis)</p>
-        <div id="velY" class="value">0.00</div>
-    </div>
-        <div class="card">
-        <p>Velocity (Z-axis)</p>
-        <div id="velZ" class="value">0.00</div>
-    </div>
+
 
 
     <div class="card">
@@ -79,6 +72,7 @@
         let velocityX = 0;
         let velocityY = 0;
         let velocityZ = 0;
+        let velocity = 0;
         let positionX = 0;
         let lastTimestamp = 0;
     
@@ -98,12 +92,11 @@
                 velocityX += accX * dt;
                 velocityY += accY * dt;
                 velocityZ += accZ * dt;
+                velocity = (velocityX**2 + velocityY**2 +velocityZ**2)**0.5 *3.6
     
                 // 4. Update the screen
                 document.getElementById('accelX').innerText = accX.toFixed(2);
-                document.getElementById('velX').innerText = velocityX.toFixed(2);
-                document.getElementById('velY').innerText = velocityY.toFixed(2);
-                document.getElementById('velZ').innerText = velocityZ.toFixed(2);
+                document.getElementById('vel').innerText = velocity.toFixed(2);
             }
         });
 
@@ -113,6 +106,7 @@
 </body>
 
 </html>
+
 
 
 
