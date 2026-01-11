@@ -16,7 +16,7 @@
     <h1>Sensor Dashboard</h1>
     
     <div class="card">
-        <p>Accelerometer (xX-axis)</p>
+        <p>Accelerometer (X-axis)</p>
         <div id="accelX" class="value">0.00</div>
     </div>
     <div class="card">
@@ -75,17 +75,23 @@
         let velocity = 0;
         let positionX = 0;
         let lastTimestamp = 0;
+        let roll = 0;
+        let pitch = 0;
+        let heading = 0;
     
         const velDisplay = document.getElementById('velX'); // Make sure you add this ID to your HTML!
-    
+        window.addEventListener('deviceorientation', (event) => {
+            heading = event.alpha*Math.PI/180;
+            pitch = event.beta*Math.PI/180;
+            roll = event.gamma*Math.PI/180;
+        });
+
+            
         window.addEventListener('devicemotion', (event) => {
             // 1. Get acceleration (subtracting gravity is better for movement)
             let accX = event.acceleration.x; 
             let accY = event.acceleration.y;
             let accZ = event.acceleration.z;
-            let roll = event.gamme*Math.PI/180;
-            let pitch = event.beta*Math.PI/180;
-            let heading = event.alpha*Math.PI/180;
             // Pre-calculate sines and cosines
             let c1 = Math.cos(h), s1 = Math.sin(h);
             let c2 = Math.cos(p), s2 = Math.sin(p);
@@ -127,6 +133,7 @@
 </body>
 
 </html>
+
 
 
 
