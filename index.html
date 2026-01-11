@@ -20,8 +20,16 @@
         <div id="accelX" class="value">0.00</div>
     </div>
     <div class="card">
-        <p>Velocity </p>
-        <div id="vel" class="value">0.0</div>
+        <p>Velocity X</p>
+        <div id="velX" class="value">0.0</div>
+    </div>
+        <div class="card">
+        <p>Velocity Y </p>
+        <div id="velY" class="value">0.0</div>
+    </div>
+        <div class="card">
+        <p>Velocity Z </p>
+        <div id="velZ" class="value">0.0</div>
     </div>
 
 
@@ -109,8 +117,7 @@
             let earthZ = (-s2)*bx    + (c2*s3)*by          + (c2*c3)*bz;
 
 // Now earthX is "East-ish", earthY is "North-ish", and earthZ is "Vertical"
-            
-            document.getElementById('accelX').innerText = earthX.toFixed(2);
+
             // 2. Get the time interval in seconds (event.interval is in ms)
             let dt = event.interval / 1000;
     
@@ -122,8 +129,10 @@
                 velocity = (velocityX**2 + velocityY**2 +velocityZ**2)**0.5 *3.6
     
                 // 4. Update the screen
-                //document.getElementById('accelX').innerText = earthX.toFixed(2);
-                document.getElementById('vel').innerText = velocity.toFixed(1);
+                document.getElementById('accelX').innerText = earthX.toFixed(2);
+                document.getElementById('velX').innerText = velocity.toFixed(1);
+                document.getElementById('velY').innerText = velocity.toFixed(1);
+                document.getElementById('velZ').innerText = velocity.toFixed(1);
             }
         });
 
@@ -133,6 +142,7 @@
 </body>
 
 </html>
+
 
 
 
