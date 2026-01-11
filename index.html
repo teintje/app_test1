@@ -17,20 +17,13 @@
     
     <div class="card">
         <p>Accelerometer (X-axis)</p>
-        <div id="accelX" class="value">0.0000</div>
-    </div>
-    <div class="card">
-        <p>Accelerometer (Y-axis)</p>
-        <div id="accelY" class="value">0.0000</div>
-    </div>
-    <div class="card">
-        <p>Accelerometer (Z-axis)</p>
-        <div id="accelZ" class="value">0.0000</div>
+        <div id="accelX" class="value">0.00</div>
     </div>
     <div class="card">
         <p>Velocity (X-axis)</p>
-        <div id="accelX" class="value">0.0000</div>
+        <div id="velX" class="value">0.00</div>
     </div>
+
 
     <div class="card">
         <p>Gyroscope (Rotation Rate Z)</p>
@@ -41,7 +34,8 @@
 
     <script>
         const startBtn = document.getElementById('start_btn');
-
+        
+        
         startBtn.onclick = function() {
             // Check if the browser requires explicit permission (iOS and newer Android)
             if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -65,14 +59,7 @@
                 let x = event.accelerationIncludingGravity.x;
                 document.getElementById('accelX').innerText = x.toFixed(2);
             });
-            window.addEventListener('devicemotion', (event) => {
-                let y = event.accelerationIncludingGravity.y;
-                document.getElementById('accelY').innerText = y.toFixed(2);
-            });
-            window.addEventListener('devicemotion', (event) => {
-                let z = event.accelerationIncludingGravity.z;
-                document.getElementById('accelZ').innerText = z.toFixed(2);
-            });
+
 
             // Gyroscope
             window.addEventListener('deviceorientation', (event) => {
@@ -80,9 +67,36 @@
                 document.getElementById('gyroZ').innerText = z.toFixed(2);
             });
         }
+        // These act like your Python global variables
+        let velocityX = 0;
+        let positionX = 0;
+        let lastTimestamp = 0;
+    
+        const velDisplay = document.getElementById('velX'); // Make sure you add this ID to your HTML!
+    
+        window.addEventListener('devicemotion', (event) => {
+            // 1. Get acceleration (subtracting gravity is better for movement)
+            let accX = event.acceleration.x; 
+    
+            // 2. Get the time interval in seconds (event.interval is in ms)
+            let dt = event.interval / 1000;
+    
+            if (accX !== null && dt > 0) {
+                // 3. Simple Integration (Velocity = acceleration * time)
+                velocityX += accX * dt;
+    
+                // 4. Update the screen
+                document.getElementById('accelX').innerText = accX.toFixed(2);
+                document.getElementById('velX').innerText = velocityX.toFixed(2);
+            }
+        });
+
+
+    
     </script>
 </body>
 
 </html>
+
 
 
