@@ -19,6 +19,14 @@
         <p>Accelerometer (X-axis)</p>
         <div id="accelX" class="value">0.00</div>
     </div>
+    <div class="card">
+        <p>Accelerometer (Y-axis)</p>
+        <div id="accelY" class="value">0.00</div>
+    </div>
+    <div class="card">
+        <p>Accelerometer (Z-axis)</p>
+        <div id="accelZ" class="value">0.00</div>
+    </div>
 
     <div class="card">
         <p>Gyroscope (Rotation Rate Z)</p>
@@ -52,6 +60,14 @@
             window.addEventListener('devicemotion', (event) => {
                 let x = event.accelerationIncludingGravity.x;
                 document.getElementById('accelX').innerText = x.toFixed(2);
+            });
+            window.addEventListener('devicemotion', (event) => {
+                let y = event.accelerationIncludingGravity.y;
+                document.getElementById('accelY').innerText = y.toFixed(2);
+            });
+            window.addEventListener('devicemotion', (event) => {
+                let z = event.accelerationIncludingGravity.z;
+                document.getElementById('accelZ').innerText = z.toFixed(2);
             });
 
             // Gyroscope
