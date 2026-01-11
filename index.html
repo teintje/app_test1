@@ -23,6 +23,14 @@
         <p>Velocity (X-axis)</p>
         <div id="velX" class="value">0.00</div>
     </div>
+        <div class="card">
+        <p>Velocity (Y-axis)</p>
+        <div id="velY" class="value">0.00</div>
+    </div>
+        <div class="card">
+        <p>Velocity (Z-axis)</p>
+        <div id="velZ" class="value">0.00</div>
+    </div>
 
 
     <div class="card">
@@ -69,6 +77,8 @@
         }
         // These act like your Python global variables
         let velocityX = 0;
+        let velocityY = 0;
+        let velocityZ = 0;
         let positionX = 0;
         let lastTimestamp = 0;
     
@@ -77,6 +87,8 @@
         window.addEventListener('devicemotion', (event) => {
             // 1. Get acceleration (subtracting gravity is better for movement)
             let accX = event.acceleration.x; 
+            let accY = event.acceleration.y;
+            let accZ = event.acceleration.z;
     
             // 2. Get the time interval in seconds (event.interval is in ms)
             let dt = event.interval / 1000;
@@ -84,10 +96,14 @@
             if (accX !== null && dt > 0) {
                 // 3. Simple Integration (Velocity = acceleration * time)
                 velocityX += accX * dt;
+                velocityY += accY * dt;
+                velocityZ += accZ * dt;
     
                 // 4. Update the screen
                 document.getElementById('accelX').innerText = accX.toFixed(2);
                 document.getElementById('velX').innerText = velocityX.toFixed(2);
+                document.getElementById('velY').innerText = velocityX.toFixed(2);
+                document.getElementById('velZ').innerText = velocityX.toFixed(2);
             }
         });
 
@@ -97,6 +113,7 @@
 </body>
 
 </html>
+
 
 
 
