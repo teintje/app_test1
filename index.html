@@ -108,7 +108,7 @@
             // 2. Get the time interval in seconds (event.interval is in ms)
             let dt = event.interval / 1000;
     
-            if (accX !== null && dt > 0) {
+            if (earthX !== null && dt > 0) {
                 // 3. Simple Integration (Velocity = acceleration * time)
                 velocityX += earthX * dt;
                 velocityY += earthY * dt;
@@ -116,7 +116,7 @@
                 velocity = (velocityX**2 + velocityY**2 +velocityZ**2)**0.5 *3.6
     
                 // 4. Update the screen
-                document.getElementById('accelX').innerText = accX.toFixed(2);
+                document.getElementById('accelX').innerText = earthX.toFixed(2);
                 document.getElementById('vel').innerText = velocity.toFixed(1);
             }
         });
@@ -127,6 +127,7 @@
 </body>
 
 </html>
+
 
 
 
