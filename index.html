@@ -83,15 +83,36 @@
             let accX = event.acceleration.x; 
             let accY = event.acceleration.y;
             let accZ = event.acceleration.z;
+            let roll = event.gamme*Math.PI/180;
+            let pitch = event.beta*Math.PI/180;
+            let heading = event.alpha*Math.PI/180;
+            // Pre-calculate sines and cosines
+            let c1 = Math.cos(h), s1 = Math.sin(h);
+            let c2 = Math.cos(p), s2 = Math.sin(p);
+            let c3 = Math.cos(r), s3 = Math.sin(r);
+            
+            // Body frame accelerations from your sensor
+            let bx = event.acceleration.x;
+            let by = event.acceleration.y;
+            let bz = event.acceleration.z;
+            
+            // Matrix Multiplication (Body to Earth Frame)
+            // This is the standard Euler rotation result:
+            let earthX = (c1*c2)*bx + (c1*s2*s3 - s1*c3)*by + (c1*s2*c3 + s1*s3)*bz;
+            let earthY = (s1*c2)*bx + (s1*s2*s3 + c1*c3)*by + (s1*s2*c3 - c1*s3)*bz;
+            let earthZ = (-s2)*bx    + (c2*s3)*by          + (c2*c3)*bz;
+
+// Now earthX is "East-ish", earthY is "North-ish", and earthZ is "Vertical"
+            
     
             // 2. Get the time interval in seconds (event.interval is in ms)
             let dt = event.interval / 1000;
     
             if (accX !== null && dt > 0) {
                 // 3. Simple Integration (Velocity = acceleration * time)
-                velocityX += accX * dt;
-                velocityY += accY * dt;
-                velocityZ += accZ * dt;
+                velocityX += earthX * dt;
+                velocityY += earthY * dt;
+                velocityZ += earthZ * dt;
                 velocity = (velocityX**2 + velocityY**2 +velocityZ**2)**0.5 *3.6
     
                 // 4. Update the screen
@@ -106,6 +127,7 @@
 </body>
 
 </html>
+
 
 
 
